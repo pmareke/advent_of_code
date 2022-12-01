@@ -13,16 +13,15 @@ class Day01:
 
     def part_two(self) -> int:
         sorted_calories = sorted(self._calculate_calories(), reverse=True)
-        print(sorted_calories)
         return sum(sorted_calories[:3])
 
     def _calculate_calories(self) -> List[int]:
         calories: List[int] = []
         acc = 0
         for line in self.lines:
-            if line == "\n":
-                calories.append(acc)
-                acc = 0
+            if line != "\n":
+                acc += int(line)
                 continue
-            acc += int(line)
+            calories.append(acc)
+            acc = 0
         return calories
