@@ -6,7 +6,7 @@ authors = ["Pedro Lopez Mareque <pedro.lopez@clarity.ai>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.8.1"
+python = "^3.10"
 pytest-xdist = "^3.0.2"
 toml = "^0.10.2"
 
