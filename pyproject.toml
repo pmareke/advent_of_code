@@ -6,11 +6,22 @@ authors = ["Pedro Lopez Mareque <pedro.lopez@clarity.ai>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.8"
-expects = "^0.9.0"
-pytest-xdist = "^3.0.2"
+python = "^3.8.1"
 
 [tool.poetry.dev-dependencies]
+expects = "^0.9.0"
+pytest-xdist = "^3.0.2"
+mypy = "^0.991"
+yapf = "^0.32.0"
+pyupgrade = "^3.2.3"
+flake8 = "^6.0.0"
+pylint = "^2.15.7"
+
+[tool.flake8]
+ignore= ["E501", "E124","E203", "W291", "W503", "W504", "E302", "E303"]
+
+[tool.yapf]
+based_on_style = "google"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

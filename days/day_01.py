@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from expects import equal, expect
 from typing import List
 
+
 @dataclass
 class Day01:
     lines: List[str]
@@ -25,4 +26,3 @@ class Day01:
                 continue
             acc += int(line)
         return calories
-
