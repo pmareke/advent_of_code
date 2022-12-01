@@ -15,7 +15,6 @@ class Day01:
     def _calculate_calories(self) -> list[int]:
         calories: list[int] = []
         for elf in "\n".join(self.lines).split("\n\n"):
-            print(elf)
             more_calories = sum(int(line) for line in elf.split("\n"))
             calories.append(more_calories)
         return calories
