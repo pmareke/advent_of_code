@@ -1,7 +1,7 @@
 import pytest
 from expects import equal, expect
 
-from days.day_01.day_01 import Day01
+from days.day_01 import Day01
 
 
 class TestDay01:
