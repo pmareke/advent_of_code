@@ -18,6 +18,7 @@ mypy = "^0.991"
 pyupgrade = "^3.2.3"
 flake8 = "^6.0.0"
 pylint = "^2.15.7"
+isort = "^5.10.1"
 
 [tool.flake8]
 ignore= ["E501", "E124","E203", "W291", "W503", "W504", "E302", "E303"]

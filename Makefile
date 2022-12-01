@@ -25,6 +25,10 @@ check-typing:  ## Run a static analyzer over the code to find issues
 check-format:
 	poetry run black --check .
 
+.PHONY: check-imports
+check-imports:
+	poetry run isort --diff .
+
 .PHONY: check-style
 check-style:
 	poetry run flake8 .
@@ -34,10 +38,11 @@ check-style:
 reformat:  ## Format python code
 	poetry run black .
 	poetry run pyupgrade --py310-plus **/*.py
+	poetry run isort .
 
 .PHONY: test
 test: ## Run all available tests
 	PYTHONPATH=. poetry run pytest -n auto
 
 .PHONY: pre-commit
-pre-commit: check-format check-typing check-style test
+pre-commit: check-imports check-format check-typing check-style test
