@@ -6,8 +6,9 @@
 
 ## How to use this repo
 
-- First install the dependencies with `make install`
-- Then run the tests with `make test`
+- First install the git hooks with `make local-setup`.
+- Then install the dependencies with `make install`.
+- And finally run the tests with `make test`.
 
 ## How to check the code
 
