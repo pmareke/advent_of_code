@@ -5,7 +5,6 @@ from days.day_01.day_01 import Day01
 
 
 class TestDay01:
-
     @pytest.fixture
     def lines(self) -> list[str]:
         return [line.strip() for line in open("inputs/1.in")]
