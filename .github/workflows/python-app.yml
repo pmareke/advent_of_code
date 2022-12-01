@@ -25,6 +25,7 @@ jobs:
         poetry install
     - name: Check style, format and lint
       run: |
+        poetry run isort .
         poetry run mypy .
         poetry run black --check .
         poetry run flake8 .                                                     
