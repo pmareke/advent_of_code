@@ -15,23 +15,11 @@ class Day02:
     def _play_round(self, player_a: str, player_b: str) -> int:
         b_points = {"X": 1, "Y": 2, "Z": 3}[player_b]
         scores = {
-            "A": {
-                "X": 3 + b_points,
-                "Y": 6 + b_points,
-                "Z": 0 + b_points,
-            },
-            "B": {
-                "Y": 3 + b_points,
-                "Z": 6 + b_points,
-                "X": 0 + b_points,
-            },
-            "C": {
-                "Z": 3 + b_points,
-                "X": 6 + b_points,
-                "Y": 0 + b_points,
-            },
+            "A": {"X": 3, "Y": 6, "Z": 0},
+            "B": {"X": 0, "Y": 3, "Z": 6},
+            "C": {"X": 6, "Y": 0, "Z": 3},
         }
-        return scores[player_a][player_b]
+        return scores[player_a][player_b] + b_points
 
     def part_two(self) -> int:
         score = 0
@@ -49,13 +37,13 @@ class Day02:
                 "C": 3 + a_points[player_a],
             },
             "Z": {
-                "B": 6 + a_points["C"],
                 "A": 6 + a_points["B"],
+                "B": 6 + a_points["C"],
                 "C": 6 + a_points["A"],
             },
             "X": {
-                "B": 0 + a_points["A"],
                 "A": 0 + a_points["C"],
+                "B": 0 + a_points["A"],
                 "C": 0 + a_points["B"],
             },
         }
