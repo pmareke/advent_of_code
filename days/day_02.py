@@ -6,14 +6,9 @@ class Day02:
         self.lines = lines
 
     def part_one(self) -> int:
-        move_regex = re.compile(r"(?P<A>[ABC]) (?P<B>[XYZ])")
         score = 0
         for line in self.lines:
-            matches = move_regex.search(line)
-            if not matches:
-                raise Exception
-            player_a = matches.group("A")
-            player_b = matches.group("B")
+            player_a, player_b = self._read_moves(line)
             score += self._play_round(player_a, player_b)
         return score
 
@@ -39,14 +34,9 @@ class Day02:
         return scores[player_a][player_b]
 
     def part_two(self) -> int:
-        move_regex = re.compile(r"(?P<A>[ABC]) (?P<B>[XYZ])")
         score = 0
         for line in self.lines:
-            matches = move_regex.search(line)
-            if not matches:
-                raise Exception
-            player_a = matches.group("A")
-            result = matches.group("B")
+            player_a, result = self._read_moves(line)
             score += self._play_round_with_winner(player_a, result)
         return score
 
@@ -67,3 +57,13 @@ class Day02:
             },
         }
         return scores[result][player_a]
+
+    @staticmethod
+    def _read_moves(line: str) -> tuple[str, str]:
+        move_regex = re.compile(r"(?P<A>[ABC]) (?P<B>[XYZ])")
+        matches = move_regex.search(line)
+        if not matches:
+            raise Exception
+        player_a = matches.group("A")
+        player_b = matches.group("B")
+        return (player_a, player_b)
