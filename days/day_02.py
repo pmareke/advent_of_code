@@ -42,9 +42,12 @@ class Day02:
 
     def _play_round_with_winner(self, player_a: str, result: str) -> int:
         a_points = {"A": 1, "B": 2, "C": 3}
-        if result == "Y":
-            return 3 + a_points[player_a]
         scores = {
+            "Y": {
+                "A": 3 + a_points[player_a],
+                "B": 3 + a_points[player_a],
+                "C": 3 + a_points[player_a],
+            },
             "Z": {
                 "B": 6 + a_points["C"],
                 "A": 6 + a_points["B"],
