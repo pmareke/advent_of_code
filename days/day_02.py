@@ -9,14 +9,14 @@ class Day02:
     def part_one(self) -> int:
         score = 0
         for line in self.lines:
-            oponent, myself = self._read_moves(line)
+            oponent, myself = self._parse_hand(line)
             score += self._play_round(oponent, myself)
         return score
 
     def part_two(self) -> int:
         score = 0
         for line in self.lines:
-            oponent, myself = self._read_moves(line)
+            oponent, myself = self._parse_hand(line)
             score += self._play_round_with_winner(oponent, myself)
         return score
 
@@ -41,7 +41,7 @@ class Day02:
         return hand_score + extra_points[myself]
 
     @staticmethod
-    def _read_moves(line: str) -> tuple[str, str]:
+    def _parse_hand(line: str) -> tuple[str, str]:
         move_regex = re.compile(r"(?P<oponent>[ABC]) (?P<myself>[XYZ])")
         matches = move_regex.search(line)
         assert matches
