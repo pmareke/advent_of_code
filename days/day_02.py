@@ -53,10 +53,10 @@ class Day02:
 
     @staticmethod
     def _read_moves(line: str) -> tuple[str, str]:
-        move_regex = re.compile(r"(?P<A>[ABC]) (?P<B>[XYZ])")
+        move_regex = re.compile(r"(?P<oponent>[ABC]) (?P<myself>[XYZ])")
         matches = move_regex.search(line)
         if not matches:
             raise Exception
-        oponent = matches.group("A")
-        myself = matches.group("B")
+        oponent = matches.group("oponent")
+        myself = matches.group("myself")
         return (oponent, myself)
