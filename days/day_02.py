@@ -14,13 +14,14 @@ class Day02:
         return score
 
     def _play_round(self, oponent: str, myself: str) -> int:
-        points = {"X": 1, "Y": 2, "Z": 3}[myself]
-        scores = {
+        points_per_hand_shape = {"X": 1, "Y": 2, "Z": 3}[myself]
+        points_per_both_hand_shapes = {
             "A": {"X": 3, "Y": 6, "Z": 0},
             "B": {"X": 0, "Y": 3, "Z": 6},
             "C": {"X": 6, "Y": 0, "Z": 3},
         }
-        return scores[oponent][myself] + points
+        hand_score = points_per_both_hand_shapes[oponent][myself]
+        return hand_score + points_per_hand_shape
 
     def part_two(self) -> int:
         score = 0
@@ -30,25 +31,25 @@ class Day02:
         return score
 
     def _play_round_with_winner(self, oponent: str, result: str) -> int:
-        points = {"A": 1, "B": 2, "C": 3}
-        scores = {
+        points_per_hand_shape = {"A": 1, "B": 2, "C": 3}
+        points_per_both_hand_shapes = {
             "Y": {
-                "A": 3 + points[oponent],
-                "B": 3 + points[oponent],
-                "C": 3 + points[oponent],
+                "A": 3 + points_per_hand_shape[oponent],
+                "B": 3 + points_per_hand_shape[oponent],
+                "C": 3 + points_per_hand_shape[oponent],
             },
             "Z": {
-                "A": 6 + points["B"],
-                "B": 6 + points["C"],
-                "C": 6 + points["A"],
+                "A": 6 + points_per_hand_shape["B"],
+                "B": 6 + points_per_hand_shape["C"],
+                "C": 6 + points_per_hand_shape["A"],
             },
             "X": {
-                "A": 0 + points["C"],
-                "B": 0 + points["A"],
-                "C": 0 + points["B"],
+                "A": 0 + points_per_hand_shape["C"],
+                "B": 0 + points_per_hand_shape["A"],
+                "C": 0 + points_per_hand_shape["B"],
             },
         }
-        return scores[result][oponent]
+        return points_per_both_hand_shapes[result][oponent]
 
     @staticmethod
     def _read_moves(line: str) -> tuple[str, str]:
