@@ -4,19 +4,6 @@ import re
 class Day02:
     def __init__(self, lines: list[str]) -> None:
         self.lines = lines
-        self.move_map: dict[str, str] = {
-            "A": "Rock",
-            "X": "Rock",
-            "B": "Paper",
-            "Y": "Paper",
-            "C": "Scissors",
-            "Z": "Scissors",
-        }
-        self.move_score: dict[str, int] = {
-            "Rock": 1,
-            "Paper": 2,
-            "Scissors": 3,
-        }
 
     def part_one(self) -> int:
         move_regex = re.compile(r"(?P<A>[ABC]) (?P<B>[XYZ])")
@@ -31,26 +18,25 @@ class Day02:
         return score
 
     def _play_round(self, player_a: str, player_b: str) -> int:
-        move_a = self.move_map[player_a]
-        move_b = self.move_map[player_b]
-        b_points = self.move_score[move_b]
-        if move_a == move_b:
-            return 3 + b_points
+        b_points = {"X": 1, "Y": 2, "Z": 3}[player_b]
         scores = {
-            "Rock": {
-                "Paper": 6 + b_points,
-                "Scissors": 0 + b_points,
+            "A": {
+                "X": 3 + b_points,
+                "Y": 6 + b_points,
+                "Z": 0 + b_points,
             },
-            "Paper": {
-                "Scissors": 6 + b_points,
-                "Rock": 0 + b_points,
+            "B": {
+                "Y": 3 + b_points,
+                "Z": 6 + b_points,
+                "X": 0 + b_points,
             },
-            "Scissors": {
-                "Rock": 6 + b_points,
-                "Paper": 0 + b_points,
+            "C": {
+                "Z": 3 + b_points,
+                "X": 6 + b_points,
+                "Y": 0 + b_points,
             },
         }
-        return scores[move_a][move_b]
+        return scores[player_a][player_b]
 
     def part_two(self) -> int:
         move_regex = re.compile(r"(?P<A>[ABC]) (?P<B>[XYZ])")
@@ -65,19 +51,19 @@ class Day02:
         return score
 
     def _play_round_with_winner(self, player_a: str, result: str) -> int:
-        move_a = self.move_map[player_a]
+        a_points = {"A": 1, "B": 2, "C": 3}
         if result == "Y":
-            return 3 + self.move_score[move_a]
+            return 3 + a_points[player_a]
         scores = {
             "Z": {
-                "Paper": 6 + self.move_score["Scissors"],
-                "Rock": 6 + self.move_score["Paper"],
-                "Scissors": 6 + self.move_score["Rock"],
+                "B": 6 + a_points["C"],
+                "A": 6 + a_points["B"],
+                "C": 6 + a_points["A"],
             },
             "X": {
-                "Paper": 0 + self.move_score["Rock"],
-                "Rock": 0 + self.move_score["Scissors"],
-                "Scissors": 0 + self.move_score["Paper"],
+                "B": 0 + a_points["A"],
+                "A": 0 + a_points["C"],
+                "C": 0 + a_points["B"],
             },
         }
-        return scores[result][move_a]
+        return scores[result][player_a]
