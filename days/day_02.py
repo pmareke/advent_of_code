@@ -36,22 +36,21 @@ class Day02:
         b_points = self.move_score[move_b]
         if move_a == move_b:
             return 3 + b_points
-        if self.move_map[player_a] == "Rock":
-            if self.move_map[player_b] == "Paper":
-                return 6 + b_points
-            if self.move_map[player_b] == "Scissors":
-                return 0 + b_points
-        if self.move_map[player_a] == "Paper":
-            if self.move_map[player_b] == "Scissors":
-                return 6 + b_points
-            if self.move_map[player_b] == "Rock":
-                return 0 + b_points
-        if self.move_map[player_a] == "Scissors":
-            if self.move_map[player_b] == "Rock":
-                return 6 + b_points
-            if self.move_map[player_b] == "Paper":
-                return 0 + b_points
-        return 0
+        scores = {
+            "Rock": {
+                "Paper": 6 + b_points,
+                "Scissors": 0 + b_points,
+            },
+            "Paper": {
+                "Scissors": 6 + b_points,
+                "Rock": 0 + b_points,
+            },
+            "Scissors": {
+                "Rock": 6 + b_points,
+                "Paper": 0 + b_points,
+            },
+        }
+        return scores[move_a][move_b]
 
     def part_two(self) -> int:
         move_regex = re.compile(r"(?P<A>[ABC]) (?P<B>[XYZ])")
@@ -66,27 +65,19 @@ class Day02:
         return score
 
     def _play_round_with_winner(self, player_a: str, result: str) -> int:
-        result_map: dict[str, str] = {
-            "X": "Lose",
-            "Y": "Draw",
-            "Z": "Win",
-        }
         move_a = self.move_map[player_a]
-        expected_result = result_map[result]
-        if expected_result == "Draw":
+        if result == "Y":
             return 3 + self.move_score[move_a]
-        if expected_result == "Win":
-            if move_a == "Paper":
-                return 6 + self.move_score["Scissors"]
-            if move_a == "Rock":
-                return 6 + self.move_score["Paper"]
-            if move_a == "Scissors":
-                return 6 + self.move_score["Rock"]
-        if expected_result == "Lose":
-            if move_a == "Paper":
-                return 0 + self.move_score["Rock"]
-            if move_a == "Rock":
-                return 0 + self.move_score["Scissors"]
-            if move_a == "Scissors":
-                return 0 + self.move_score["Paper"]
-        return 0
+        scores = {
+            "Z": {
+                "Paper": 6 + self.move_score["Scissors"],
+                "Rock": 6 + self.move_score["Paper"],
+                "Scissors": 6 + self.move_score["Rock"],
+            },
+            "X": {
+                "Paper": 0 + self.move_score["Rock"],
+                "Rock": 0 + self.move_score["Scissors"],
+                "Scissors": 0 + self.move_score["Paper"],
+            },
+        }
+        return scores[result][move_a]
