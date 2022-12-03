@@ -31,7 +31,7 @@ check-imports:
 
 .PHONY: check-style
 check-style:
-	poetry run flake8 .
+	poetry run flake8 . --ignore=E203
 	poetry run pylint ./*
 
 .PHONY: reformat
