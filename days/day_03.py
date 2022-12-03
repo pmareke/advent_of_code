@@ -17,8 +17,8 @@ class Day03:
         step = 3
         duplicates: list[str] = []
         for index in range(0, len(self.lines), step):
-            groups = self.lines[index : index + step]
-            duplicate = self._find_duplicate_in_group(groups=groups)
+            lines = self.lines[index : index + step]
+            duplicate = self._find_duplicate_in_groups_of_three_lines(lines)
             duplicates.append(duplicate)
         return self._calculate_priorities(duplicates)
 
@@ -29,11 +29,11 @@ class Day03:
         return list(duplicates)[0]
 
     @staticmethod
-    def _find_duplicate_in_group(groups: list[str]) -> str:
-        duplicates = list(set(groups[0]) & set(groups[1]) & set(groups[2]))
+    def _find_duplicate_in_groups_of_three_lines(lines: list[str]) -> str:
+        duplicates = list(set(lines[0]) & set(lines[1]) & set(lines[2]))
         return duplicates[0]
 
     @staticmethod
     def _calculate_priorities(duplicates: list[str]) -> int:
-        letters: str = string.ascii_lowercase + string.ascii_uppercase
+        letters = string.ascii_lowercase + string.ascii_uppercase
         return sum(letters.index(duplicate) + 1 for duplicate in duplicates)
