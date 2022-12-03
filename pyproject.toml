@@ -20,9 +20,6 @@ flake8 = "^6.0.0"
 pylint = "^2.15.7"
 isort = "^5.10.1"
 
-[tool.flake8]
-ignore= ["E501", "E124", "E203", "W291", "W503", "W504", "E302", "E303"]
-
 [tool.pyright]
 venvPath="/home/pedrolopez/.cache/pypoetry/virtualenvs"
 venv="aoc-F4So9u8E-py3.10"
