@@ -18,7 +18,7 @@ class Day03:
         duplicates: list[str] = []
         for index in range(0, len(self.lines), step):
             lines = self.lines[index : index + step]
-            duplicate = self._find_duplicate_in_groups_of_three_lines(lines)
+            duplicate = self._find_duplicate_in_groups(lines)
             duplicates.append(duplicate)
         return self._calculate_priorities(duplicates)
 
@@ -29,8 +29,8 @@ class Day03:
         return list(duplicates)[0]
 
     @staticmethod
-    def _find_duplicate_in_groups_of_three_lines(lines: list[str]) -> str:
-        duplicates = set(lines[0]) & set(lines[1]) & set(lines[2])
+    def _find_duplicate_in_groups(lines: list[str]) -> str:
+        duplicates: list[str] = list(set.intersection(*map(set, lines)))  # type: ignore
         return list(duplicates)[0]
 
     @staticmethod
