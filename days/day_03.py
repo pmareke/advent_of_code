@@ -30,8 +30,8 @@ class Day03:
 
     @staticmethod
     def _find_duplicate_in_groups_of_three_lines(lines: list[str]) -> str:
-        duplicates = list(set(lines[0]) & set(lines[1]) & set(lines[2]))
-        return duplicates[0]
+        duplicates = set(lines[0]) & set(lines[1]) & set(lines[2])
+        return list(duplicates)[0]
 
     @staticmethod
     def _calculate_priorities(duplicates: list[str]) -> int:
