@@ -35,5 +35,6 @@ class Day03:
 
     @staticmethod
     def _calculate_priorities(duplicates: list[str]) -> int:
-        letters = string.ascii_lowercase + string.ascii_uppercase
-        return sum(letters.index(duplicate) + 1 for duplicate in duplicates)
+        return sum(
+            string.ascii_letters.index(duplicate) + 1 for duplicate in duplicates
+        )
