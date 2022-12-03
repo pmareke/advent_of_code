@@ -24,7 +24,7 @@ class Day03:
 
     @staticmethod
     def _find_duplicate_in_line(line: str) -> str:
-        medium = int(len(line) / 2)
+        medium = len(line) // 2
         duplicates = set(line[:medium]) & set(line[medium:])
         return list(duplicates)[0]
 
