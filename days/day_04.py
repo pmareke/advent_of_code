@@ -10,7 +10,7 @@ class Day04:
         overlap = 0
         for line in self.lines:
             first_list, second_list = self._parse_line(line)
-            if self._lists_overlap(first_list, second_list):
+            if self._are_subset(first_list, second_list):
                 overlap += 1
         return overlap
 
@@ -34,14 +34,7 @@ class Day04:
     def _create_list(start: str, end: str) -> list[int]:
         return list(range(int(start), int(end) + 1))
 
-    def _lists_overlap(self, first_list: list[int], second_list: list[int]) -> bool:
-        if self._is_subset(first_list, second_list):
-            return True
-        if self._is_subset(second_list, first_list):
-            return True
-        return False
-
-    def _is_subset(self, left_list: list[int], right_list: list[int]) -> bool:
+    def _are_subset(self, left_list: list[int], right_list: list[int]) -> bool:
         left_set = set(left_list)
         right_set = set(right_list)
         return left_set.issubset(right_set) or right_set.issubset(left_set)
