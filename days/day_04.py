@@ -41,4 +41,4 @@ class Day04:
 
     @staticmethod
     def _any_item_in_common(first_list: list[int], second_list: list[int]) -> bool:
-        return any(True for x in first_list if x in second_list)
+        return len(set(first_list).intersection(set(second_list))) > 0
