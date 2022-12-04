@@ -23,11 +23,11 @@ class Day04:
         return overlap
 
     def _parse_line(self, line: str) -> tuple[list[int], list[int]]:
-        regex = re.compile(r"(?P<x1>\d+)-(?P<x2>\d+),(?P<y1>\d+)-(?P<y2>\d+)")
+        regex = re.compile(r"(?P<s1>\d+)-(?P<e1>\d+),(?P<s2>\d+)-(?P<e2>\d+)")
         matches = regex.search(line)
         assert matches
-        first_list = self._create_list(matches.group("x1"), matches.group("x2"))
-        second_list = self._create_list(matches.group("y1"), matches.group("y2"))
+        first_list = self._create_list(matches.group("s1"), matches.group("e1"))
+        second_list = self._create_list(matches.group("s2"), matches.group("e2"))
         return (first_list, second_list)
 
     @staticmethod
