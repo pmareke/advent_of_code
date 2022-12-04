@@ -26,13 +26,13 @@ class Day04:
         regex = re.compile(r"(?P<x1>\d+)-(?P<x2>\d+),(?P<y1>\d+)-(?P<y2>\d+)")
         matches = regex.search(line)
         assert matches
-        range_one = self._create_range(matches.group("x1"), matches.group("x2"))
-        range_two = self._create_range(matches.group("y1"), matches.group("y2"))
-        return (list(range_one), list(range_two))
+        first_list = self._create_list(matches.group("x1"), matches.group("x2"))
+        second_list = self._create_list(matches.group("y1"), matches.group("y2"))
+        return (first_list, second_list)
 
     @staticmethod
-    def _create_range(start: str, end: str) -> range:
-        return range(int(start), int(end) + 1)
+    def _create_list(start: str, end: str) -> list[int]:
+        return list(range(int(start), int(end) + 1))
 
     def _lists_overlap(self, first_list: list[int], second_list: list[int]) -> bool:
         if self._is_sublist(first_list, second_list):
@@ -47,9 +47,9 @@ class Day04:
             return True
         if not right_list:
             return False
-        return right_list[: len(left_list)] == left_list or Day04._is_sublist(
-            left_list, right_list[1:]
-        )
+        if right_list[: len(left_list)] == left_list:
+            return True
+        return Day04._is_sublist(left_list, right_list[1:])
 
     @staticmethod
     def _any_item_in_common(first_list: list[int], second_list: list[int]) -> bool:
