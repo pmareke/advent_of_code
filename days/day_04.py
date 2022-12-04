@@ -41,15 +41,14 @@ class Day04:
             return True
         return False
 
-    @staticmethod
-    def _is_sublist(left_list: list[int], right_list: list[int]) -> bool:
+    def _is_sublist(self, left_list: list[int], right_list: list[int]) -> bool:
         if not left_list:
             return True
         if not right_list:
             return False
         if right_list[: len(left_list)] == left_list:
             return True
-        return Day04._is_sublist(left_list, right_list[1:])
+        return self._is_sublist(left_list, right_list[1:])
 
     @staticmethod
     def _any_item_in_common(first_list: list[int], second_list: list[int]) -> bool:
