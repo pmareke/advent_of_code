@@ -35,20 +35,16 @@ class Day04:
         return list(range(int(start), int(end) + 1))
 
     def _lists_overlap(self, first_list: list[int], second_list: list[int]) -> bool:
-        if self._is_sublist(first_list, second_list):
+        if self._is_subset(first_list, second_list):
             return True
-        if self._is_sublist(second_list, first_list):
+        if self._is_subset(second_list, first_list):
             return True
         return False
 
-    def _is_sublist(self, left_list: list[int], right_list: list[int]) -> bool:
-        if not left_list:
-            return True
-        if not right_list:
-            return False
-        if right_list[: len(left_list)] == left_list:
-            return True
-        return self._is_sublist(left_list, right_list[1:])
+    def _is_subset(self, left_list: list[int], right_list: list[int]) -> bool:
+        left_set = set(left_list)
+        right_set = set(right_list)
+        return left_set.issubset(right_set) or right_set.issubset(left_set)
 
     @staticmethod
     def _any_item_in_common(first_list: list[int], second_list: list[int]) -> bool:
