@@ -49,15 +49,15 @@ class Day05:
                     stacks[index].append(letter)
         return stacks
 
+    @staticmethod
+    def _parse_stacks_line(line: str) -> list[str]:
+        return [line[index] for index in range(1, len(line), 4)]
+
     def _parse_bottom(self, bottom: str) -> list[Instruction]:
         instructions: list[Instruction] = []
         for line in bottom.strip().split("\n"):
             instructions.append(self._parse_instruction(line))
         return instructions
-
-    @staticmethod
-    def _parse_stacks_line(line: str) -> list[str]:
-        return [line[index] for index in range(1, len(line), 4)]
 
     @staticmethod
     def _parse_instruction(line: str) -> Instruction:
