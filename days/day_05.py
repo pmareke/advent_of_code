@@ -45,8 +45,9 @@ class Day05:
             for index, letter in enumerate(items):
                 if index >= len(stacks):
                     stacks.append([])
-                if not letter == " ":
-                    stacks[index].append(letter)
+                if letter == " ":
+                    continue
+                stacks[index].append(letter)
         return stacks
 
     @staticmethod
@@ -54,10 +55,7 @@ class Day05:
         return [line[index] for index in range(1, len(line), 4)]
 
     def _parse_bottom(self, bottom: str) -> list[Instruction]:
-        instructions: list[Instruction] = []
-        for line in bottom.strip().split("\n"):
-            instructions.append(self._parse_instruction(line))
-        return instructions
+        return [self._parse_instruction(line) for line in bottom.strip().split("\n")]
 
     @staticmethod
     def _parse_instruction(line: str) -> Instruction:
