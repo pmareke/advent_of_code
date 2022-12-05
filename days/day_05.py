@@ -51,17 +51,13 @@ class Day05:
 
     def _parse_bottom(self, bottom: str) -> list[Instruction]:
         instructions: list[Instruction] = []
-        for line in bottom.split("\n"):
-            if line:
-                instructions.append(self._parse_instruction(line))
+        for line in bottom.strip().split("\n"):
+            instructions.append(self._parse_instruction(line))
         return instructions
 
     @staticmethod
     def _parse_stacks_line(line: str) -> list[str]:
-        stacks: list[str] = []
-        for index in range(1, len(line), 4):
-            stacks.append(line[index])
-        return stacks
+        return [line[index] for index in range(1, len(line), 4)]
 
     @staticmethod
     def _parse_instruction(line: str) -> Instruction:
