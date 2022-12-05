@@ -16,9 +16,10 @@ class Day05:
     def part_one(self) -> str:
         stacks, instructions = self._parse_file()
         for instruction in instructions:
-            items = stacks[instruction.origin - 1][: instruction.items]
+            items = []
+            for _ in range(instruction.items):
+                items.append(stacks[instruction.origin - 1].pop(0))
             for item in items:
-                stacks[instruction.origin - 1].pop(0)
                 stacks[instruction.destination - 1].insert(0, item)
         return "".join([stack[0] for stack in stacks])
 
