@@ -14,22 +14,19 @@ class Day05:
     file: str
 
     def part_one(self) -> str:
-        stacks, instructions = self._parse_file()
-        for instruction in instructions:
-            items = []
-            for _ in range(instruction.items):
-                items.append(stacks[instruction.origin - 1].pop(0))
-            for item in items:
-                stacks[instruction.destination - 1].insert(0, item)
-        return "".join([stack[0] for stack in stacks])
+        return self._play()
 
     def part_two(self) -> str:
+        return self._play(two=True)
+
+    def _play(self, two: bool = False) -> str:
         stacks, instructions = self._parse_file()
         for instruction in instructions:
             items = []
             for _ in range(instruction.items):
                 items.append(stacks[instruction.origin - 1].pop(0))
-            for item in reversed(items):
+            items = list(reversed(items)) if two else items
+            for item in items:
                 stacks[instruction.destination - 1].insert(0, item)
         return "".join([stack[0] for stack in stacks])
 
