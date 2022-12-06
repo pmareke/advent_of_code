@@ -1,20 +1,45 @@
+import pytest
 from expects import equal, expect
 
 from days.day_06 import Day06
 
 
+def read_input() -> str:
+    with open("inputs/6.in") as file:
+        return file.readline().strip()
+
+
 class TestDay06:
-    def setup(self) -> None:
-        with open("inputs/6.in") as file:
-            lines = [line.strip() for line in file]
-            self.day = Day06(lines)
+    @pytest.mark.parametrize(
+        "signal,expected_result",
+        [
+            ("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 7),
+            ("bvwbjplbgvbhsrlpgdmjqwftvncz", 5),
+            ("nppdvjthqldpwncqszvftbrmjlhg", 6),
+            ("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 10),
+            ("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 11),
+            (read_input(), 1848),
+        ],
+    )
+    def test_part_one(self, signal: str, expected_result: int) -> None:
+        day = Day06(signal)
+        result = day.part_one()
 
-    def test_part_one(self) -> None:
-        result = self.day.part_one()
+        expect(result).to(equal(expected_result))
 
-        expect(result).to(equal(0))
+    @pytest.mark.parametrize(
+        "signal,expected_result",
+        [
+            ("mjqjpqmgbljsphdztnvjfqwrcgsmlb", 19),
+            ("bvwbjplbgvbhsrlpgdmjqwftvncz", 23),
+            ("nppdvjthqldpwncqszvftbrmjlhg", 23),
+            ("nznrnfrfntjfmvfwmzdfjlvtqnbhcprsg", 29),
+            ("zcfzfwzzqfrljwzlrfnpqdbhtmscgvjw", 26),
+            (read_input(), 2308),
+        ],
+    )
+    def test_part_two(self, signal: str, expected_result: int) -> None:
+        day = Day06(signal)
+        result = day.part_two()
 
-    def test_part_two(self) -> None:
-        result = self.day.part_two()
-
-        expect(result).to(equal(0))
+        expect(result).to(equal(expected_result))
