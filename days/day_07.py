@@ -66,27 +66,27 @@ class Day07:
                 current_directory = current_directory.directories[name]
                 continue
             if line.startswith("dir "):
-                new_dir = self._create_directory_from_line(line)
-                new_dir.parent = current_directory
+                new_dir = self._create_directory_from_line(line, current_directory)
                 current_directory.directories[new_dir.name] = new_dir
                 continue
             current_directory.files.append(self._create_file_from_line(line))
         return root
 
     @staticmethod
+    def _create_directory_from_line(
+        line: str, current_directory: Directory
+    ) -> Directory:
+        name = line.split("dir ")[1]
+        return Directory(name=name, parent=current_directory)
+
+    @staticmethod
     def _create_file_from_line(line: str) -> File:
         size, name = line.split(" ")
         return File(name=name, size=int(size))
 
-    @staticmethod
-    def _create_directory_from_line(line: str) -> Directory:
-        name = line.split("dir ")[1]
-        return Directory(name)
-
     def _calculate_sizes(self, root: Directory) -> None:
-        sizes = [root.size]
         for child in root.directories.values():
-            self._walk(child, [*sizes, child.size])
+            self._walk(child, [root.size, child.size])
 
     def _walk(self, directory: Directory, acc: list[int]) -> list[int]:
         if not directory.directories:
