@@ -17,4 +17,4 @@ class TestDay07:
     def test_part_two(self) -> None:
         result = self.day.part_two()
 
-        expect(result).to(equal(0))
+        expect(result).to(equal(5756764))
