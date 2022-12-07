@@ -22,28 +22,31 @@ class Directory:
         sizes = [child.size for child in self.directories.values()]
         return file_size + sum(sizes)
 
-    def __repr__(self) -> str:
-        return f"name={self.name}, directories={self.directories}"
+
+LIMIT_DISK_SPACE = 70000000
+UPDATE_MINIMUM_SPACE = 30000000
 
 
 class Day07:
     def __init__(self, lines: list[str]) -> None:
         self.lines = lines
-        self.total: list[int] = []
-        self.total2: list[list[int]] = []
+        self.sizes: list[list[int]] = []
 
     def part_one(self) -> int:
         root = self._build_tree()
         self._calculate_sizes(root)
-        return sum(self.total)
+        result = []
+        for size in self.sizes:
+            result.extend([sum(s for s in size if s <= 100000)])
+        return sum(result)
 
     def part_two(self) -> int:
         root = self._build_tree()
         self._calculate_sizes(root)
-        unused_space = 70000000 - root.size
-        needed_space = 30000000 - unused_space
+        unused_space = LIMIT_DISK_SPACE - root.size
+        needed_space = UPDATE_MINIMUM_SPACE - unused_space
         result = []
-        for sizes in self.total2:
+        for sizes in self.sizes:
             result.extend([size for size in sizes if size > needed_space])
         return int(sorted(result)[0])
 
@@ -87,8 +90,7 @@ class Day07:
 
     def _walk(self, directory: Directory, acc: list[int]) -> list[int]:
         if not directory.directories:
-            self.total.append(sum(s for s in acc if s <= 100000))
-            self.total2.append(acc)
+            self.sizes.append(acc)
             return acc
         for child in directory.directories.values():
             self._walk(child, [*acc, child.size])
