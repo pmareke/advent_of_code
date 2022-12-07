@@ -12,7 +12,7 @@ class TestDay07:
     def test_part_one(self) -> None:
         result = self.day.part_one()
 
-        expect(result).to(equal(0))
+        expect(result).to(equal(1297683))
 
     def test_part_two(self) -> None:
         result = self.day.part_two()
