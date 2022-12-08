@@ -20,10 +20,13 @@
 
 - [X] [Day 1](https://adventofcode.com/2020/day/1)
 
-
 ## Solutions for the AoC 2019
 
 - [X] [Day 1](https://adventofcode.com/2019/day/1)
+
+## Solutions for the AoC 2018
+
+- [X] [Day 1](https://adventofcode.com/2018/day/1)
 
 ## How to use this repo
 
