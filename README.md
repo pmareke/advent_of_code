@@ -12,6 +12,10 @@
 - [X] [Day 8](https://adventofcode.com/2022/day/8)
 - [ ] [Day 9](https://adventofcode.com/2022/day/9)
 
+## Solutions for the AoC 2021
+
+- [X] [Day 1](https://adventofcode.com/2021/day/1)
+
 ## How to use this repo
 
 - First install the git hooks with `make local-setup`.
