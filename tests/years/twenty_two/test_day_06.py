@@ -1,7 +1,7 @@
 import pytest
 from expects import equal, expect
 
-from days.day_06 import Day06
+from years.twenty_two.days.day_06 import Day06
 
 
 def read_input() -> str:

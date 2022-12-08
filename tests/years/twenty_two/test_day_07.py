@@ -1,20 +1,20 @@
 from expects import equal, expect
 
-from days.day_04 import Day04
+from years.twenty_two.days.day_07 import Day07
 
 
-class TestDay04:
+class TestDay07:
     def setup(self) -> None:
-        with open("inputs/4.in") as file:
+        with open("inputs/7.in") as file:
             lines = [line.strip() for line in file]
-            self.day = Day04(lines)
+            self.day = Day07(lines)
 
     def test_part_one(self) -> None:
         result = self.day.part_one()
 
-        expect(result).to(equal(498))
+        expect(result).to(equal(1297683))
 
     def test_part_two(self) -> None:
         result = self.day.part_two()
 
-        expect(result).to(equal(859))
+        expect(result).to(equal(5756764))

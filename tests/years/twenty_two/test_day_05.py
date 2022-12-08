@@ -1,6 +1,6 @@
 from expects import equal, expect
 
-from days.day_05 import Day05
+from years.twenty_two.days.day_05 import Day05
 
 
 class TestDay05:
