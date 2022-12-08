@@ -5,7 +5,7 @@ from years.twenty_two.days.day_05 import Day05
 
 class TestDay05:
     def setup(self) -> None:
-        with open("inputs/5.in") as file:
+        with open("years/twenty_two/inputs/5.in") as file:
             self.day = Day05(file.read())
 
     def test_part_one(self) -> None:

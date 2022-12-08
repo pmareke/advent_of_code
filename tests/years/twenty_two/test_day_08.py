@@ -5,7 +5,7 @@ from years.twenty_two.days.day_08 import Day08
 
 class TestDay08:
     def setup(self) -> None:
-        with open("inputs/8.in") as file:
+        with open("years/twenty_two/inputs/8.in") as file:
             lines = [line.strip() for line in file]
             self.day = Day08(lines)
 

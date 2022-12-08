@@ -5,7 +5,7 @@ from years.twenty_two.days.day_06 import Day06
 
 
 def read_input() -> str:
-    with open("inputs/6.in") as file:
+    with open("years/twenty_two/inputs/6.in") as file:
         return file.readline().strip()
 
 
