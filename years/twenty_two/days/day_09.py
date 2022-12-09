@@ -11,11 +11,10 @@ class Day09:
     def part_one(self) -> int:
         head = (0, 0)
         tail = (0, 0)
-        positions = set()
+        positions: set[tuple[int, int]] = set([tail])
         for line in self.lines:
             direction, steps = line.split(" ")
             for _ in range(int(steps)):
-                positions.add(tail)
                 head = (head[0] + DX[direction], head[1] + DY[direction])
                 tail = self._calculate_knot(head, tail)
                 positions.add(tail)
@@ -24,11 +23,10 @@ class Day09:
     def part_two(self) -> int:
         head = (0, 0)
         tails = [(0, 0) for _ in range(9)]
-        positions = set()
+        positions: set[tuple[int, int]] = set([tails[1]])
         for line in self.lines:
             direction, steps = line.split(" ")
             for _ in range(int(steps)):
-                positions.add(tails[-1])
                 head = (head[0] + DX[direction], head[1] + DY[direction])
                 tails[0] = self._calculate_knot(head, tails[0])  # type: ignore
                 for i in range(1, 9):
