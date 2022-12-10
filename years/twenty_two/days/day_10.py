@@ -8,18 +8,14 @@ class Day10:
 
     def part_one(self) -> int:
         cycles = self._calculate_cycles()
-        first_cycle, last_cycle, step = [19, 220, 40]
-        return sum(
-            (idx + 1) * cycles[idx] for idx in range(first_cycle, last_cycle, step)
-        )
+        first, last, step = 19, 220, 40
+        return sum((idx + 1) * cycles[idx] for idx in range(first, last, step))
 
     def part_two(self) -> list[str]:
-        crt_high = 6
-        crt_wide = 40
+        crt_high, crt_wide = 6, 40
+        crt_display: list[list[str]] = [[] for _ in range(crt_high)]
         cycles = self._calculate_cycles()
-        crt_display: list[list[str]] = []
         for idx in range(crt_high):
-            crt_display.append([])
             for idy in range(crt_wide):
                 cycle = (idx * crt_wide) + idy
                 value = "#" if abs(cycles[cycle] - idy) <= 1 else "."
@@ -29,13 +25,14 @@ class Day10:
     def _calculate_cycles(self) -> list[int]:
         cycles: list[int] = [1]
         for line in self.lines:
-            last_value = cycles[-1]
-            cycles.append(last_value)
-            if line == "noop":
-                continue
-            value = self._parse_line(line) + last_value
-            cycles.append(value)
+            cycles.extend(self._next_cycles(line, cycles))
         return cycles
+
+    def _next_cycles(self, line: str, cycles: list[int]) -> list[int]:
+        last_value = cycles[-1]
+        if line == "noop":
+            return [last_value]
+        return [last_value, self._parse_line(line) + last_value]
 
     @staticmethod
     def _parse_line(line: str) -> int:
