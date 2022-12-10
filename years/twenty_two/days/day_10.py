@@ -30,16 +30,16 @@ class Day10:
         cycles: list[int] = [1]
         for line in self.lines:
             last_value = cycles[-1]
+            cycles.append(last_value)
             if line == "noop":
-                cycles.append(last_value)
                 continue
-            value = self._parse_line(line)
-            cycles.extend([last_value, last_value + value])
+            value = self._parse_line(line) + last_value
+            cycles.append(value)
         return cycles
 
     @staticmethod
     def _parse_line(line: str) -> int:
-        regex = re.compile(r"(?P<operation>.*) (?P<value>.*)")
+        regex = re.compile(r".* (?P<value>.*)")
         matches = regex.search(line)
         assert matches
         value = int(matches.group("value"))
