@@ -13,3 +13,15 @@ class TestDay01:
         result = self.day.part_one()
 
         expect(result).to(equal(13220))
+
+    def test_part_two(self) -> None:
+        result = self.day.part_two()
+        expected_result = [
+            "###..#..#..##..#..#.#..#.###..####.#..#.",
+            "#..#.#..#.#..#.#.#..#..#.#..#.#....#.#..",
+            "#..#.#..#.#..#.##...####.###..###..##...",
+            "###..#..#.####.#.#..#..#.#..#.#....#.#..",
+            "#.#..#..#.#..#.#.#..#..#.#..#.#....#.#..",
+            "#..#..##..#..#.#..#.#..#.###..####.#..#.",
+        ]  # RUAKHBEK
+        expect(result).to(equal(expected_result))

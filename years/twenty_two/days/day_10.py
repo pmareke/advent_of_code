@@ -8,18 +8,23 @@ class Day10:
 
     def part_one(self) -> int:
         cycles = self._calculate_cycles()
-        return sum((idx + 1) * cycles[idx] for idx in range(19, 220, 40))
+        first_cycle, last_cycle, step = [19, 220, 40]
+        return sum(
+            (idx + 1) * cycles[idx] for idx in range(first_cycle, last_cycle, step)
+        )
 
-    def part_two(self) -> None:
+    def part_two(self) -> list[str]:
+        crt_high = 6
+        crt_wide = 40
         cycles = self._calculate_cycles()
         crt_display: list[list[str]] = []
-        for idx in range(6):
+        for idx in range(crt_high):
             crt_display.append([])
-            for idy in range(40):
-                cycle = (idx * 40) + idy
+            for idy in range(crt_wide):
+                cycle = (idx * crt_wide) + idy
                 value = "#" if abs(cycles[cycle] - idy) <= 1 else "."
                 crt_display[idx].append(value)
-        self._print_crt(crt_display)
+        return self._print_crt(crt_display)
 
     def _calculate_cycles(self) -> list[int]:
         cycles: list[int] = [1]
@@ -41,5 +46,5 @@ class Day10:
         return value
 
     @staticmethod
-    def _print_crt(crt_display: list[list[str]]) -> None:
-        print(["".join(line) for line in crt_display])
+    def _print_crt(crt_display: list[list[str]]) -> list[str]:
+        return ["".join(line) for line in crt_display]
