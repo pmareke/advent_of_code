@@ -7,4 +7,5 @@ extend-ignore =
     W503,
     W504,
     E302,
-    E303
+    E303,
+    E731
