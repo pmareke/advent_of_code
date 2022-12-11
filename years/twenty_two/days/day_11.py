@@ -58,18 +58,19 @@ class Day11:
         return monkeys
 
     def _play_round(self, monkeys: list[Monkey], part_two: bool) -> None:
-        less_common_divisor = self._find_less_common_divisor(monkeys)
+        less_common_multiplier = self._find_less_common_divisor(monkeys)
         for monkey in monkeys:
             for item in monkey.items:
                 monkey.inspections += 1
                 if part_two:
                     new_worry_level = monkey.operation(item) // 3
                 else:
-                    new_worry_level = monkey.operation(item) % less_common_divisor
+                    new_worry_level = monkey.operation(item) % less_common_multiplier
                 if new_worry_level % monkey.divisible_by == 0:
-                    monkeys[monkey.true_monkey].items.append(new_worry_level)
+                    destination = monkey.true_monkey
                 else:
-                    monkeys[monkey.false_monkey].items.append(new_worry_level)
+                    destination = monkey.false_monkey
+                monkeys[destination].items.append(new_worry_level)
             monkey.items = []
 
     @staticmethod
