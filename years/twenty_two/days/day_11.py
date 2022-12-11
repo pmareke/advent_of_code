@@ -17,12 +17,19 @@ class Day11:
     lines: list[str]
 
     def part_one(self) -> int:
-        monkeys = self._create_monkeys()
-        return self._play_rounds(monkeys, rounds=20)
+        return self._play_rounds(rounds=20)
 
     def part_two(self) -> int:
+        return self._play_rounds(rounds=10000)
+
+    def _play_rounds(self, rounds: int) -> int:
         monkeys = self._create_monkeys()
-        return self._play_rounds(monkeys, rounds=10000)
+        iteration = 0
+        while iteration < rounds:
+            iteration += 1
+            self._play_round(monkeys, bool(rounds == 20))
+        items = sorted([monkey.inspected_items for monkey in monkeys])
+        return items[-1] * items[-2]
 
     def _create_monkeys(self) -> list[Monkey]:
         monkeys: list[Monkey] = []
@@ -49,14 +56,6 @@ class Day11:
             int(false_monkey),
         )
 
-    def _play_rounds(self, monkeys: list[Monkey], rounds: int) -> int:
-        iteration = 0
-        while iteration < rounds:
-            iteration += 1
-            self._play_round(monkeys, bool(rounds == 20))
-        inspected_items = sorted([monkey.inspected_items for monkey in monkeys])
-        return inspected_items[-1] * inspected_items[-2]
-
     def _play_round(self, monkeys: list[Monkey], part_two: bool) -> None:
         less_common_divisor = self._find_less_common_divisor(monkeys)
         for monkey in monkeys:
@@ -66,12 +65,10 @@ class Day11:
                     new_worry_level = monkey.operation(item) // 3
                 else:
                     new_worry_level = monkey.operation(item) % less_common_divisor
-                destination = (
-                    monkey.true_monkey
-                    if new_worry_level % monkey.divisible_by == 0
-                    else monkey.false_monkey
-                )
-                monkeys[destination].items.append(new_worry_level)
+                if new_worry_level % monkey.divisible_by == 0:
+                    monkeys[monkey.true_monkey].items.append(new_worry_level)
+                else:
+                    monkeys[monkey.false_monkey].items.append(new_worry_level)
             monkey.items = []
 
     @staticmethod
