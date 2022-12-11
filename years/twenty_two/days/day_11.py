@@ -12,6 +12,25 @@ class Monkey:
     inspected_items: int = 0
 
 
+class MonkeyFactory:
+    @staticmethod
+    def create_monkey(section: str) -> Monkey:
+        lines = section.split("\n")
+        items = [lines[1].split("Starting items: ")[1].split(", ")]
+        callback = lines[2].split("Operation: new = ")[1]
+        operation = lambda old: eval(callback)
+        divisible_by = int(lines[3].split()[-1])
+        true_monkey = int(lines[4].split()[-1])
+        false_monkey = int(lines[5].split()[-1])
+        return Monkey(
+            list(map(int, *items)),
+            operation,
+            divisible_by,
+            true_monkey,
+            false_monkey,
+        )
+
+
 @dataclass
 class Day11:
     lines: list[str]
@@ -34,27 +53,8 @@ class Day11:
     def _create_monkeys(self) -> list[Monkey]:
         monkeys: list[Monkey] = []
         for section in "\n".join(self.lines).split("\n\n"):
-            monkeys.append(self._create_monkey(section))
+            monkeys.append(MonkeyFactory.create_monkey(section))
         return monkeys
-
-    @staticmethod
-    def _create_monkey(section: str) -> Monkey:
-        lines = section.split("\n")
-        items = [
-            int(number) for number in lines[1].split("Starting items: ")[1].split(", ")
-        ]
-        callback = lines[2].split("Operation: new = ")[1]
-        operation = lambda old: eval(callback)
-        divisible_by = lines[3].split("Test: divisible by ")[1]
-        true_monkey = lines[4].split("If true: throw to monkey ")[1]
-        false_monkey = lines[5].split("If false: throw to monkey ")[1]
-        return Monkey(
-            items,
-            operation,
-            int(divisible_by),
-            int(true_monkey),
-            int(false_monkey),
-        )
 
     def _play_round(self, monkeys: list[Monkey], part_two: bool) -> None:
         less_common_divisor = self._find_less_common_divisor(monkeys)
