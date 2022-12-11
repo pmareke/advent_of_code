@@ -9,7 +9,7 @@ class Monkey:
     divisible_by: int
     true_monkey: int
     false_monkey: int
-    inspected_items: int = 0
+    inspections: int = 0
 
 
 class MonkeyFactory:
@@ -42,13 +42,14 @@ class Day11:
         return self._play_rounds(rounds=10000)
 
     def _play_rounds(self, rounds: int) -> int:
-        monkeys = self._create_monkeys()
         iteration = 0
+        monkeys = self._create_monkeys()
         while iteration < rounds:
             iteration += 1
-            self._play_round(monkeys, bool(rounds == 20))
-        items = sorted([monkey.inspected_items for monkey in monkeys])
-        return items[-1] * items[-2]
+            part_two = rounds == 20
+            self._play_round(monkeys, part_two)
+        inspections = sorted([monkey.inspections for monkey in monkeys])
+        return inspections[-1] * inspections[-2]
 
     def _create_monkeys(self) -> list[Monkey]:
         monkeys: list[Monkey] = []
@@ -60,7 +61,7 @@ class Day11:
         less_common_divisor = self._find_less_common_divisor(monkeys)
         for monkey in monkeys:
             for item in monkey.items:
-                monkey.inspected_items += 1
+                monkey.inspections += 1
                 if part_two:
                     new_worry_level = monkey.operation(item) // 3
                 else:
