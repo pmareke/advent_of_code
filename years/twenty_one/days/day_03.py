@@ -34,6 +34,10 @@ class Day03:
         for idx in range(len(lines[0])):
             for line in lines:
                 digits[idx] += int(line[idx])
-        return [
-            "0" if len(lines) - digit > len(lines) // 2 else "1" for digit in digits
-        ]
+        most_commons: list[str] = []
+        for digit in digits:
+            if len(lines) - digit > len(lines) // 2:
+                most_commons.append("1")
+                continue
+            most_commons.append("0")
+        return most_commons
