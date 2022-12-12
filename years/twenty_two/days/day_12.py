@@ -49,9 +49,9 @@ class Day12:
             if area[point_x][point_y] == 26:
                 return int(distance + 1)
             couples: list[tuple[int, int]] = [(-1, 0), (0, 1), (1, 0), (0, -1)]
-            for diff_x, diff_y in couples:
-                next_row = diff_x + point_x
-                next_column = diff_y + point_y
+            for idx, idy in couples:
+                next_row = idx + point_x
+                next_column = idy + point_y
                 if (
                     0 <= next_row < rows
                     and 0 <= next_column < columns
