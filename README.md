@@ -14,7 +14,8 @@
 - [X] [Day 10](https://adventofcode.com/2022/day/10)
 - [X] [Day 11](https://adventofcode.com/2022/day/11)
 - [X] [Day 12](https://adventofcode.com/2022/day/12)
-- [ ] [Day 13](https://adventofcode.com/2022/day/13)
+- [X] [Day 13](https://adventofcode.com/2022/day/13)
+- [ ] [Day 14](https://adventofcode.com/2022/day/14)
 
 ## Solutions for the AoC 2021
 
