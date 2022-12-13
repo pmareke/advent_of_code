@@ -45,13 +45,12 @@ class Day13:
         if isinstance(left, list) and isinstance(right, list):
             i = 0
             while i < len(left) and i < len(right):
-                is_valid = self._compare(left[i], right[i])
-                if is_valid != 0:
-                    return is_valid
+                compare = self._compare(left[i], right[i])
+                if compare != 0:
+                    return compare
                 i += 1
             if i == len(left) and i < len(right):
                 return -1
             if i == len(right) and i < len(left):
                 return 1
-            return 0
         return 0
