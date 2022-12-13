@@ -25,16 +25,12 @@ class Day13:
             left, right = line.split("\n")
             packets.append(eval(left))
             packets.append(eval(right))
-        packets.append([[2]])
-        packets.append([[6]])
-        sorted_packets = sorted(
-            packets, key=cmp_to_key(lambda p1, p2: self._is_valid(p1, p2)) # type: ignore
-        )
+        packets.extend([[[2]], [[6]]])
+        sorted_packets = sorted(packets, key=cmp_to_key(self._is_valid))
         result = 1
         for index, packet in enumerate(sorted_packets):
-            if packet == [[2]] or packet == [[6]]:
+            if packet in [[[2]], [[6]]]:
                 result *= index + 1
-
         return result
 
     def _is_valid(self, left: Union[list, int], right: Union[list, int]) -> int:
