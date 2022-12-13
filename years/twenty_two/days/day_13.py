@@ -28,7 +28,7 @@ class Day13:
         packets.append([[2]])
         packets.append([[6]])
         sorted_packets = sorted(
-            packets, key=cmp_to_key(lambda p1, p2: self._is_valid(p1, p2))
+            packets, key=cmp_to_key(lambda p1, p2: self._is_valid(p1, p2)) # type: ignore
         )
         result = 1
         for index, packet in enumerate(sorted_packets):
@@ -37,7 +37,7 @@ class Day13:
 
         return result
 
-    def _is_valid(self, left: list, right: list) -> int:
+    def _is_valid(self, left: Union[list, int], right: Union[list, int]) -> int:
         if isinstance(left, int) and isinstance(right, int):
             if left == right:
                 return 0
