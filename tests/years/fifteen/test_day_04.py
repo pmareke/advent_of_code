@@ -1,22 +1,22 @@
 import pytest
 from expects import equal, expect
 
-from years.twenty_two.days.day_11 import Day11
+from years.fifteen.days.day_04 import Day04
 
 
 @pytest.mark.only_ci
-class TestDay11:
+class TestDay04:
     def setup(self) -> None:
-        with open("years/twenty_two/inputs/11.in") as file:
+        with open("years/fifteen/inputs/4.in") as file:
             lines = [line.strip() for line in file]
-            self.day = Day11(lines)
+            self.day = Day04(lines)
 
     def test_part_one(self) -> None:
         result = self.day.part_one()
 
-        expect(result).to(equal(58056))
+        expect(result).to(equal(346386))
 
     def test_part_two(self) -> None:
         result = self.day.part_two()
 
-        expect(result).to(equal(15048718170))
+        expect(result).to(equal(9958218))

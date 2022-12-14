@@ -42,7 +42,7 @@ reformat:  ## Format python code
 
 .PHONY: test
 test: ## Run all available tests
-	PYTHONPATH=. poetry run pytest -n auto -m "not only_ci"
+	PYTHONPATH=. poetry run pytest -n auto -m "not only_ci" --durations=1
 
 .PHONY: pre-commit
 pre-commit: check-imports check-format check-typing check-style test
