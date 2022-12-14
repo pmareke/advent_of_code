@@ -15,8 +15,9 @@ class Day14:
         packets = self._parse()
 
         floor = 2 + max(packet[1] for packet in packets)
-        low_x = min(packet[0] for packet in packets) - 2000
-        hi_x = max(packet[0] for packet in packets) + 2000
+        random_extra_space = 200  # after some tests this number is good enough
+        low_x = min(packet[0] for packet in packets) - random_extra_space
+        hi_x = max(packet[0] for packet in packets) + random_extra_space
         for value in range(low_x, hi_x):
             packets.add((value, floor))
 
@@ -35,10 +36,12 @@ class Day14:
                     rock = (rock[0] + 1, rock[1] + 1)
                 else:
                     break
+
             times += 1
+            packets.add(rock)
+
             if rock == origin:
                 return times
-            packets.add(rock)
 
     def _parse(self) -> set:
         packets: set[tuple[int, int]] = set()
