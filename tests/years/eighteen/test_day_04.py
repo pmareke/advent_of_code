@@ -1,10 +1,8 @@
-import pytest
 from expects import equal, expect
 
 from years.eighteen.days.day_04 import Day04
 
 
-@pytest.mark.skip("WIP")
 class TestDay04:
     def setup(self) -> None:
         with open("years/eighteen/inputs/4.in") as file:
