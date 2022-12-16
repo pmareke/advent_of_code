@@ -9,52 +9,30 @@ class Day05:
     def part_one(self) -> int:
         seen: dict[tuple, int] = defaultdict(int)
         for line in self.lines:
-            x, y = line.split(" -> ")
-            x1, y1 = map(int, x.split(","))
-            x2, y2 = map(int, y.split(","))
-            if x1 != x2 and y1 != y2:
-                continue
-            dx = abs(x1 - x2)
-            dy = abs(y1 - y2)
-            for xx in range(0, dx + 1):
-                for yy in range(0, dy + 1):
-                    new_x = x1 + xx * (1 if x1 < x2 else -1)
-                    new_y = y1 + yy * (1 if y1 < y2 else -1)
-                    new_point = (new_x, new_y)
-                    seen[new_point] += 1
-        return len(dict(filter(lambda point: point[1] >= 2, seen.items())))
+            point_1, point_2 = line.split(" -> ")
+            x1, y1 = map(int, point_1.split(","))
+            x2, y2 = map(int, point_2.split(","))
+            dx = x2 - x1
+            dy = y2 - y1
+            diff: int = max(abs(dx), abs(dy))
+            for idx in range(diff + 1):
+                x = x1 + (1 if dx > 0 else (-1 if dx < 0 else 0)) * idx
+                y = y1 + (1 if dy > 0 else (-1 if dy < 0 else 0)) * idx
+                if dx == 0 or dy == 0:
+                    seen[(x, y)] += 1
+        return len([point for point in seen if seen[point] > 1])
 
     def part_two(self) -> int:
         seen: dict[tuple, int] = defaultdict(int)
         for line in self.lines:
-            x, y = line.split(" -> ")
-            x1, y1 = map(int, x.split(","))
-            x2, y2 = map(int, y.split(","))
-            if x1 != x2 and y1 != y2:
-                if x1 == y1 and x2 == y2:
-                    for idx in range(min(x1, x2), max(x1, x2) + 1):
-                        new_point = (idx, idx)
-                        seen[new_point] += 1
-                    continue
-                if x1 == y2 and x2 == y1:
-                    for idx in range(abs(x1 - y1) + 1):
-                        new_x = x1 + idx * (1 if x1 < x2 else -1)
-                        new_y = y1 + idx * (1 if y1 < y2 else -1)
-                        new_point = (new_x, new_y)
-                        seen[new_point] += 1
-                    continue
-                for idx in range(abs(x1 - x2) + 1):
-                    new_x = x1 + idx * (1 if x1 < x2 else -1)
-                    new_y = y1 + idx * (1 if y1 < y2 else -1)
-                    new_point = (new_x, new_y)
-                    seen[new_point] += 1
-                continue
-            dx = abs(x1 - x2)
-            dy = abs(y1 - y2)
-            for xx in range(0, dx + 1):
-                for yy in range(0, dy + 1):
-                    new_x = x1 + xx * (1 if x1 < x2 else -1)
-                    new_y = y1 + yy * (1 if y1 < y2 else -1)
-                    new_point = (new_x, new_y)
-                    seen[new_point] += 1
-        return len(dict(filter(lambda point: point[1] >= 2, seen.items())))
+            point_x, point_y = line.split(" -> ")
+            x1, y1 = map(int, point_x.split(","))
+            x2, y2 = map(int, point_y.split(","))
+            dx = x2 - x1
+            dy = y2 - y1
+            diff: int = max(abs(dx), abs(dy))
+            for idx in range(diff + 1):
+                x = x1 + (1 if dx > 0 else (-1 if dx < 0 else 0)) * idx
+                y = y1 + (1 if dy > 0 else (-1 if dy < 0 else 0)) * idx
+                seen[(x, y)] += 1
+        return len([point for point in seen if seen[point] > 1])
