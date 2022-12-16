@@ -17,13 +17,13 @@ class Bingo:
             for idy, number in enumerate(column):
                 if number == played_number:
                     self.columns[idx].pop(idy)
-                    if len(self.columns[idx]) == 0:
+                    if not self.columns[idx]:
                         return True
         for idx, row in enumerate(self.rows):
             for idy, number in enumerate(row):
                 if number == played_number:
                     self.rows[idx].pop(idy)
-                    if len(self.rows[idx]) == 0:
+                    if not self.rows[idx]:
                         return True
         return False
 
@@ -49,8 +49,8 @@ class BingoBuilder:
         columns: list[list[int]] = []
         rows: list[list[int]] = []
         for line in group.split("\n"):
-            numbers_line = list(map(int, re.findall(r"(\d+)", line)))
-            columns.append(numbers_line)
+            numbers = list(map(int, re.findall(r"(\d+)", line)))
+            columns.append(numbers)
         for idx in range(len(columns[0])):
             rows.append([])
             for column in columns:
