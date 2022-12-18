@@ -12,9 +12,8 @@ class Day05:
         steps = 0
         while limit < size:
             steps += 1
-            previous = limit
-            limit += numbers[limit]
-            numbers[previous] += 1
+            numbers[limit] += 1
+            limit += numbers[limit] - 1
         return steps
 
     def part_two(self) -> int:
@@ -24,8 +23,8 @@ class Day05:
         steps = 0
         while limit < size:
             steps += 1
-            previous = limit
-            limit += numbers[limit]
-            numbers[previous] += -1 if numbers[previous] >= 3 else 1
+            offset = -1 if numbers[limit] >= 3 else 1
+            numbers[limit] += offset
+            limit += numbers[limit] - offset
         print(numbers)
         return steps

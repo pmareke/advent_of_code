@@ -1,8 +1,10 @@
+import pytest
 from expects import equal, expect
 
 from years.seventeen.days.day_05 import Day05
 
 
+@pytest.mark.only_ci
 class TestDay05:
     def setup(self) -> None:
         with open("years/seventeen/inputs/5.in") as file:
